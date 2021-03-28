@@ -1,0 +1,53 @@
+<h1>Zaměstnanci</h1>
+
+{{#admin}}
+    <a href="../employees/create.php" class="btn btn-primary">Nový zaměstnanec</a>
+{{/admin}}
+<form action="../index.php" method="post" class="form-inline" onsubmit="return confirm('Skutečně se chcete odhlásit?')">
+    <input type="hidden" name="logout" value="logout">
+    <input type="submit" value="Odhlásit se" class="btn btn-danger">
+</form>
+<table class = 'table'>
+    <thead>
+    <tr>
+        <th>Jméno</th>
+        <th>Místnost</th>
+        <th>Pozice</th>
+        <th>Telefon</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{# employees}}
+        <tr>
+            <td><a href="{{ employeeDetail }}?employeeId={{ employee_id }}">{{ name }} {{ surname }}</a></td>
+            <td>{{ r_name }}</td>
+            <td>{{ job }}</td>
+            <td>{{ phone }}</td>
+            {{#admin}}
+                <td>
+                    <a href="../employees/update.php?employee_id={{ employee_id }}" class="btn btn-primary">Aktualizovat</a>
+                    <form action="../employees/delete.php" method="post" class="form-inline" onsubmit="return confirm('Skutečně smazat?\nAkce je nevratná')">
+                        <input type="hidden" name="employee_id" value="{{ employee_id }}">
+                        <input type="submit" value="Smazat" class="btn btn-danger">
+                    </form>
+                </td>
+            {{/admin}}
+
+        </tr>
+    {{/ employees}}
+    </tbody>
+</table>
+<p><a href='../homepage.html'><span class='glyphicon glyphicon-arrow-left' aria-hidden='true'></span> Zpět na rozcestník</a></p>
+{{^admin}}
+    <h1>Změna hesla</h1>
+    <form action="../_includes/passCreated.php" method="post" class="form-inline" onsubmit="return confirm('Skutečně chcete změnit heslo?\nBudete se muset znovu přihlásit.')">
+        <div class="mb-3">
+            <label for="passChange">Nové heslo</label>
+            <input type="text" name="passChange" id="passChange" class="form-control">
+        </div>
+        <div class="mb-3">
+            <input type="hidden" name="action" value="changePass">
+            <input type="submit" value="Změna Hesla" class="btn btn-primary">
+        </div>
+    </form>
+{{/admin}}

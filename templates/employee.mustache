@@ -1,0 +1,20 @@
+{{# employee}}
+    <h1>Karta osoby: {{ name }} {{ surname }}</h1>
+    <dl class='dl-horizontal'>
+        <dt>Jméno</dt>
+        <dd>{{name}}</dd>
+        <dt>Příjmení</dt>
+        <dd>{{surname}}</dd>
+        <dt>Pozice</dt>
+        <dd>{{job}}</dd>
+        <dt>Mzda</dt>
+        <dd>{{wage}}</dd>
+        <dt>Domovská místnost</dt>
+        <dd><a href="{{ roomDetail }}?roomId={{ room_id }}">{{r_name}}</a></dd>
+        <dt>Klíče</dt>
+        {{# keys}}
+            <dd><a href="{{ roomDetail }}?roomId={{ room_id }}">{{name}}</a></dd>
+        {{/keys}}
+    </dl>
+{{/employee}}
+<p><a href='employee-list.php'><span class='glyphicon glyphicon-arrow-left' aria-hidden='true'></span> Zpět na seznam zaměstnanců</a></p>

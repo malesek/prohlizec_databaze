@@ -1,0 +1,60 @@
+{{#create}}<h1>Vytvoření zaměstnance</h1>{{/create}}
+{{#update}}<h1>Upravení zaměstnance</h1>{{/update}}
+
+
+<form method="post">
+    <div class="mb-3">
+        <label for="name">Jméno</label>
+        <input type="text" name="name" id="name" value="{{employee.name}}" required class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="surname">Příjmení</label>
+        <input type="text" name="surname" id="surname" value="{{employee.surname}}" required class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="job">Pozice</label>
+        <input type="text" name="job" id="job" value="{{employee.job}}" required class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="wage">Výplata</label>
+        <input type="number" name="wage" id="wage" value="{{employee.wage}}" required class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="username">Uživatelské jméno</label>
+        <input type="text" name="username" id="username" value="{{employee.username}}" required class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="password">Heslo</label>
+        <input type="text" name="password" id="password" value="" required class="form-control">
+    </div>
+    <div class="mb-3">
+        <input {{#employee.admin}}checked{{/employee.admin}} type="checkbox" id="admin" name="admin">
+        <label for="admin">Admin</label><br>
+    </div>
+    <div class="mb-3">
+        <label for="room">Domovská místnost</label>
+        <select name="room" id="room">
+            {{#rooms}}
+                <option value="{{ room_id }}">{{ name }}</option>
+            {{/rooms}}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Klíče</label><br>
+        {{#rooms}}
+            <input {{#key}}checked{{/key}} type="checkbox" name="roomKeys[]" value="{{ room_id }}">
+            <label for="roomKeys[]">{{ name }}</label><br>
+        {{/rooms}}
+    </div>
+    <div class="mb-3">
+        {{#create}}
+            <input type="hidden" name="action" value="create">
+            <input type="submit" value="Vytvořit zaměstnance" class="btn btn-primary">
+        {{/create}}
+        {{#update}}
+            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="{{employee.getPrimaryKeyName}}" value="{{employee.getPrimaryKey}}">
+            <input type="submit" value="Upravit zaměstnance" class="btn btn-primary">
+        {{/update}}
+    </div>
+</form>

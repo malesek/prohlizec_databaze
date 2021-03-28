@@ -1,0 +1,50 @@
+<h1>Místnosti</h1>
+{{#admin}}
+<a href="../rooms/create.php" class="btn btn-primary">Nová místnost</a>
+{{/admin}}
+<form action="../index.php" method="post" class="form-inline" onsubmit="return confirm('Skutečně se chcete odhlásit?')">
+    <input type="hidden" name="logout" value="logout">
+    <input type="submit" value="Odhlásit se" class="btn btn-danger">
+</form>
+
+<table class = 'table roomList'>
+    <thead>
+    <tr>
+        <th>Jméno</th>
+        <th>Číslo</th>
+        <th>Telefon</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{# rooms}}
+        <tr>
+            <td><a href="{{ roomDetail }}?roomId={{ room_id }}">{{ name }}</a></td>
+            <td>{{ no }}</td>
+            <td>{{ phone }}</td>
+            {{#admin}}
+            <td>
+                <a href="../rooms/update.php?room_id={{ room_id }}" class="btn btn-primary">Aktualizovat</a>
+                <form action="../rooms/delete.php" method="post" class="form-inline" onsubmit="return confirm('Skutečně smazat?\nAkce je nevratná')">
+                    <input type="hidden" name="room_id" value="{{ room_id }}">
+                    <input type="submit" value="Smazat" class="btn btn-danger">
+                </form>
+            </td>
+            {{/admin}}
+        </tr>
+    {{/rooms}}
+    </tbody>
+</table>
+<p><a href='../homepage.html'><span class='glyphicon glyphicon-arrow-left' aria-hidden='true'></span> Zpět na rozcestník</a></p>
+{{^admin}}
+    <h1>Změna hesla</h1>
+    <form action="../_includes/passCreated.php" method="post" class="form-inline" onsubmit="return confirm('Skutečně chcete změnit heslo?\nBudete se muset znovu přihlásit.')">
+        <div class="mb-3">
+            <label for="passChange">Nové heslo</label>
+            <input type="text" name="passChange" id="passChange" class="form-control">
+        </div>
+        <div class="mb-3">
+            <input type="hidden" name="action" value="changePass">
+            <input type="submit" value="Změnit heslo" class="btn btn-primary">
+        </div>
+    </form>
+{{/admin}}

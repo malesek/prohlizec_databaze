@@ -1,0 +1,28 @@
+{{#create}}<h1>Vytvoření místnosti</h1>{{/create}}
+{{#update}}<h1>Upravení místnosti</h1>{{/update}}
+
+<form method="post">
+    <div class="mb-3">
+        <label for="name">Jméno</label>
+        <input type="text" name="name" id="name" value="{{room.name}}" required class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="no">Číslo</label>
+        <input type="number" name="no" id="no" value="{{room.no}}" required class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="phone">Telefon</label>
+        <input type="number" name="phone" id="phone" value="{{room.phone}}" class="form-control">
+    </div>
+    <div class="mb-3">
+        {{#create}}
+            <input type="hidden" name="action" value="create">
+            <input type="submit" value="Vytvořit místnost" class="btn btn-primary">
+        {{/create}}
+        {{#update}}
+            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="{{room.getPrimaryKeyName}}" value="{{room.getPrimaryKey}}">
+            <input type="submit" value="Upravit místnost" class="btn btn-primary">
+        {{/update}}
+    </div>
+</form>

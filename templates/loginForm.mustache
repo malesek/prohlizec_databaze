@@ -1,0 +1,17 @@
+<form method="post">
+    <div class="mb-3">
+        <label for="username">Uživatelské jméno</label>
+        <input type="text" name="username" id="username" value="{{login.username}}" required class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="password">Heslo</label>
+        <input type="password" name="password" id="password" value="{{login.password}}" required class="form-control">
+    </div>
+    {{#fail}}
+        <p>Špatné přihlašovací jméno nebo heslo. Prosím opakujte přihlášení</p>
+    {{/fail}}
+    <div class="mb-3">
+        <input type="hidden" name="action" value="login">
+        <input type="submit" value="Přihlásit se" class="btn btn-primary">
+    </div>
+</form>
